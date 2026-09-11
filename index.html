@@ -135,7 +135,7 @@ p{margin:0}
 .pair-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:28px}
 .pair-head .display{grid-column:1/7;font-size:clamp(36px,4.6vw,64px)}
 .pair-head .lead{grid-column:7/13;font-size:19px}
-.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pair-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .pair-grid figure{margin:0}
 .pair-grid img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%}
 .pair-grid figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:14px;font-family:var(--ital);font-style:italic;font-size:15px;color:var(--ink-soft)}
@@ -278,8 +278,8 @@ p{margin:0}
 
   <div class="ticker" aria-hidden="true">
     <div class="track">
-      <span>Ladbroke Fern <i>ink on grasscloth</i></span><span>Portobello Strawberry <i>ink on chalk</i></span><span>Westbourne Ginkgo <i>Delft on chalk</i></span><span>Painted to order <i>any colourway</i></span>
-      <span>Ladbroke Fern <i>ink on grasscloth</i></span><span>Portobello Strawberry <i>ink on chalk</i></span><span>Westbourne Ginkgo <i>Delft on chalk</i></span><span>Painted to order <i>any colourway</i></span>
+      <span>Portobello Strawberry <i>ink on chalk</i></span><span>Westbourne Ginkgo <i>Delft on chalk</i></span><span>Painted to order <i>any colourway</i></span>
+      <span>Portobello Strawberry <i>ink on chalk</i></span><span>Westbourne Ginkgo <i>Delft on chalk</i></span><span>Painted to order <i>any colourway</i></span>
     </div>
   </div>
 
@@ -287,35 +287,12 @@ p{margin:0}
     <div class="wrap">
       <div class="section-head rv">
         <p class="eyebrow">The papers</p>
-        <h2 class="display">Three patterns, painted to order.</h2>
+        <h2 class="display">Two patterns, painted to order.</h2>
         <p class="lead">Each design is drawn once, then painted freehand onto every length. Choose a pattern, a ground and an ink. Or bring us a room and we will draw something for it.</p>
       </div>
 
-      <article class="paper rv">
-        <div class="paper-head" style="--sw:#2A2922">
-          <h3 class="display">Ladbroke Fern</h3>
-          <p class="colourway">Ink on natural grasscloth</p>
-          <p>Whorls of fern painted in casein ink straight onto woven sisal, so the weave shows through every leaf. Named for Ladbroke Square gardens in April, when the fronds unfurl.</p>
-        </div>
-        <div class="paper-drop">
-          <div class="drop still">
-            <img class="swatch" src="img/atelier.jpg" alt="Ladbroke Fern being hung in an arched dining room" loading="lazy">
-          </div>
-        </div>
-        <div class="paper-spec">
-          <p class="spec-title">Specification</p>
-          <dl class="spec">
-            <dt>Width</dt><dd>91 cm</dd>
-            <dt>Vertical repeat</dt><dd>64 cm</dd>
-            <dt>Length</dt><dd>Painted to your drop, up to 3.2 m</dd>
-            <dt>Ground</dt><dd>Sisal grasscloth, paper-backed</dd>
-            <dt>Medium</dt><dd>Casein distemper</dd>
-            <dt>Match</dt><dd>Half drop</dd>
-          </dl>
-        </div>
-      </article>
 
-      <article class="paper alt rv">
+      <article class="paper rv">
         <div class="paper-drop">
           <div class="drop multi" data-drop id="strawberry-drop">
             <img class="swatch active" data-cw="ink" src="img/swatch-strawberry-ink.jpg" alt="The Portobello Strawberry repeat in ink on chalk" loading="lazy">
@@ -379,8 +356,8 @@ p{margin:0}
   <section class="section atelier" id="atelier">
     <div class="wrap">
       <figure class="atelier-media rv" style="margin:0">
-        <img src="img/atelier.jpg" alt="A paperhanger on a step ladder fitting a length of Ladbroke Fern in an arched dining room, paste table and rolls in the foreground" loading="lazy">
-        <figcaption>Ladbroke Fern going up in a dining room off Kensington Park Road. The paste table has been in the family longer than the pattern.</figcaption>
+        <img src="img/atelier.jpg" alt="A paperhanger on a step ladder fitting a length of Portobello Strawberry in apricot and duck egg in an arched dining room, paste table and rolls in the foreground" loading="lazy">
+        <figcaption>Portobello Strawberry, apricot and duck egg, going up in a dining room off Kensington Park Road. The paste table has been in the family longer than the pattern.</figcaption>
       </figure>
       <div class="atelier-text">
         <div class="rv">
@@ -414,7 +391,6 @@ p{margin:0}
       <div class="controls rv">
         <fieldset class="ctl"><legend>Pattern</legend>
           <div class="pills" id="motifs">
-            <button class="pill" type="button" data-motif="fern">Fern</button>
             <button class="pill" type="button" data-motif="strawberry">Strawberry</button>
             <button class="pill" type="button" data-motif="ginkgo" aria-pressed="true">Ginkgo</button>
           </div>
@@ -476,8 +452,8 @@ p{margin:0}
       </div>
       <div class="pair rv">
         <div class="pair-head">
-          <h3 class="display">One drawing, two houses.</h3>
-          <p class="lead">The same strawberry cartoon, painted in ochre for a west-facing bedroom and in ink for a room with an oak bed that wanted something to argue with.</p>
+          <h3 class="display">One drawing, three houses.</h3>
+          <p class="lead">The same strawberry cartoon, painted in ochre for a west-facing bedroom, in ink for a room with an oak bed that wanted something to argue with, and in apricot and duck egg for a dining room under an arch.</p>
         </div>
         <div class="pair-grid">
           <figure>
@@ -487,6 +463,10 @@ p{margin:0}
           <figure>
             <img src="img/room-strawberry-ink.jpg" alt="Portobello Strawberry in ink on chalk behind a carved oak bed with a copper anglepoise lamp" loading="lazy">
             <figcaption><span>Ink on chalk. The leaves were painted last, wet into the fruit, so the edges bleed like a woodcut.</span><small>Private house, W11</small></figcaption>
+          </figure>
+          <figure>
+            <img src="img/atelier.jpg" alt="Portobello Strawberry in apricot and duck egg being hung in an arched dining room" loading="lazy">
+            <figcaption><span>Apricot and duck egg on chalk. Hung on a Tuesday, photographed before the furniture went back.</span><small>Private house, W11</small></figcaption>
           </figure>
         </div>
       </div>
