@@ -12,8 +12,10 @@ PAPERED_CSS = """
 .paper-bg i.on{opacity:1}
 .paper-bg::after{content:"";position:absolute;inset:0;background:rgba(246,242,234,.24)}
 .critters{position:fixed;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
-.hero .wrap,.section .wrap,.footer .wrap{max-width:1160px;background:var(--plaster);padding:clamp(28px,4.5vw,72px);box-shadow:0 40px 80px -50px rgba(30,29,24,.7),0 0 0 1px rgba(30,29,24,.06)}
-.hero{padding-top:calc(96px + 2vw)}
+.hero .wrap,.section .wrap,.footer .wrap{max-width:1000px;background:var(--plaster);padding:clamp(28px,4.5vw,72px);box-shadow:0 40px 80px -50px rgba(30,29,24,.7),0 0 0 1px rgba(30,29,24,.06)}
+.hero{padding-top:calc(96px + 2vw);padding-bottom:clamp(120px,14vw,200px)}
+.section{padding-top:clamp(100px,12vw,180px);padding-bottom:clamp(100px,12vw,180px)}
+.footer{padding-top:clamp(100px,12vw,180px)}
 .atelier,.mixer{background:transparent}
 .atelier .wrap{background:var(--atelier-bg)}
 .mixer .wrap{background:var(--plaster-deep)}
@@ -48,7 +50,7 @@ PAPERED_JS = """
   window.__paperInk = function(p){ if (inks[p]) ink = inks[p]; };
   var rnd = function(a,b){ return a + Math.random()*(b-a); };
   var S = function(){ return W < 700 ? 0.72 : 1; };
-  var ground = function(){ return H - 12; };
+  var ground = function(){ return H - 118; };
   var ents = [];
 
   /* shapes: local units, facing right, feet on y=0 */
@@ -137,7 +139,7 @@ PAPERED_JS = """
   }
   function spawnFlight(){
     var dir = Math.random() < 0.5 ? 1 : -1;
-    ents.push({ kind:'flight', x: dir>0 ? -160 : W+160, dir:dir, speed:230, base:rnd(H*0.25,H*0.5), t:0, p:0 });
+    ents.push({ kind:'flight', x: dir>0 ? -160 : W+160, dir:dir, speed:230, base:rnd(H*0.35,H*0.6), t:0, p:0 });
   }
   function spawnLeaf(top){
     ents.push({ kind: Math.random() < 0.8 ? 'leaf' : 'acorn', x:rnd(0,W), y: top ? -50 : rnd(0,H), vy:rnd(16,30), rot:rnd(0,6), spin:rnd(-0.8,0.8), phase:rnd(0,6), t:rnd(0,10) });
