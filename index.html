@@ -1,0 +1,707 @@
+<title>Eleanor's Wall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Karla:ital,wght@0,300..800;1,300..800&family=Libre+Caslon+Text:ital@0;1&display=swap">
+<style>
+:root{
+  --plaster:#EAE3D4; --plaster-deep:#DFD5C1; --chalk:#F6F2EA;
+  --ink:#1E1D18; --ink-soft:#55524A; --ink-faint:#8B877C;
+  --ochre:#C8A14C; --ochre-deep:#A9832F; --ginkgo:#7C9FBF; --grass:#A98A5C;
+  --line:rgba(30,29,24,.18); --line-strong:rgba(30,29,24,.45);
+  --display:'Italiana',"Didot","Bodoni MT","Times New Roman",serif;
+  --ital:'Libre Caslon Text',Georgia,"Times New Roman",serif;
+  --sans:'Karla',"Helvetica Neue",Arial,sans-serif;
+  --max:1360px; --gutter:clamp(20px,4.5vw,64px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--plaster);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ochre);outline-offset:4px}
+.wrap{max-width:var(--max);margin:0 auto}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.085;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* type */
+.eyebrow{font:500 11px/1.2 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin:0}
+.display{font-family:var(--display);font-weight:400;line-height:.98;letter-spacing:.005em;text-wrap:balance;margin:0}
+.lead{font-family:var(--ital);font-style:italic;font-size:clamp(19px,1.6vw,23px);line-height:1.45;color:var(--ink-soft);margin:0;max-width:34ch}
+p{margin:0}
+.copy{max-width:60ch}
+.copy p + p{margin-top:1em}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:12px;padding:15px 24px;border:1px solid var(--ink);font:500 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;background:transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.btn:hover{background:var(--ink);color:var(--chalk)}
+.btn.solid{background:var(--ink);color:var(--chalk)}
+.btn.solid:hover{background:var(--ochre);border-color:var(--ochre);color:var(--ink)}
+.btn svg{width:16px;height:16px}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;padding:18px var(--gutter);display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(234,227,212,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.nav .mark{font-family:var(--display);font-size:26px;text-decoration:none;letter-spacing:.02em}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:34px}
+.nav ul a{font:500 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.nav ul a:hover{color:var(--ink);border-color:var(--ink)}
+.nav .btn{padding:12px 18px}
+
+/* hero */
+.hero{padding:calc(96px + 3vw) var(--gutter) clamp(56px,6vw,96px);position:relative}
+.hero .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:0 24px}
+.hero-top{grid-column:1/13;grid-row:1;position:relative;z-index:2}
+.hero .eyebrow{margin-bottom:28px}
+.wordmark{font-size:clamp(76px,15.5vw,224px);line-height:.86}
+.wordmark .l{display:block;overflow:hidden;padding-bottom:.06em}
+.wordmark .l span{display:block;animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+.wordmark .l:nth-child(2){padding-left:clamp(40px,12vw,220px)}
+.wordmark .l:nth-child(2) span{animation-delay:.12s}
+.hero-media{grid-column:7/13;grid-row:2;position:relative;z-index:1;margin-top:clamp(-40px,-3.5vw,-60px)}
+.hero-media .frame{position:relative;aspect-ratio:4/5;max-height:78vh;overflow:hidden;background:var(--plaster-deep);animation:unroll 1.5s cubic-bezier(.6,.05,.2,1) .25s both}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;animation:settle 2.4s cubic-bezier(.2,.7,.2,1) .25s both}
+.ticket{position:absolute;left:18px;bottom:18px;background:var(--chalk);padding:14px 18px 14px 16px;box-shadow:0 12px 30px -18px rgba(30,29,24,.6);display:grid;gap:3px;border-left:3px solid var(--ginkgo)}
+.ticket b{font-family:var(--display);font-weight:400;font-size:22px;line-height:1;letter-spacing:.01em}
+.ticket i{font-family:var(--ital);font-size:14px;color:var(--ink-soft)}
+.ticket small{font:500 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-top:6px}
+.hero-side{grid-column:1/7;grid-row:2;align-self:end;display:grid;gap:34px;padding:clamp(24px,5vw,80px) 0 40px;position:relative;z-index:2}
+.hero-side .lead{font-size:clamp(20px,1.75vw,26px)}
+.hero-side .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.sample{width:clamp(120px,12vw,176px);transform:rotate(-4deg);box-shadow:0 18px 36px -20px rgba(30,29,24,.7);position:relative;background:var(--chalk);padding:8px 8px 34px}
+.sample img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.sample::after{content:"Portobello Strawberry · apricot";position:absolute;left:10px;right:10px;bottom:10px;font:400 11px/1.2 var(--ital);font-style:italic;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sample::before{content:"";position:absolute;top:-8px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--ochre);box-shadow:0 1px 2px rgba(0,0,0,.4);transform:translateX(-50%)}
+.hero-row{display:flex;align-items:flex-end;gap:36px}
+.vert{position:absolute;right:calc(-1 * var(--gutter) + 18px);top:50%;writing-mode:vertical-rl;font:500 10px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--ink-faint);transform:translateY(-50%)}
+@keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+@keyframes unroll{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes settle{from{transform:scale(1.08) translateY(-3%)}to{transform:scale(1) translateY(0)}}
+
+/* ticker */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:16px 0;background:var(--plaster)}
+.ticker .track{display:flex;width:max-content;animation:slide 48s linear infinite}
+.ticker span{font-family:var(--display);font-size:clamp(22px,2.3vw,32px);white-space:nowrap;padding:0 28px;letter-spacing:.02em}
+.ticker span i{font-family:var(--ital);font-size:.7em;color:var(--ink-soft);margin-left:14px}
+.ticker span::after{content:"◆";font-size:.4em;vertical-align:middle;margin-left:52px;color:var(--ochre)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+.section{padding:clamp(80px,9vw,140px) var(--gutter)}
+.section-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:clamp(40px,5vw,72px)}
+.section-head .display{grid-column:1/8;font-size:clamp(44px,6vw,88px)}
+.section-head .lead{grid-column:8/13}
+.section-head .eyebrow{grid-column:1/13;margin-bottom:-8px}
+
+/* papers */
+.paper{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding:clamp(44px,5vw,80px) 0;border-top:1px solid var(--line)}
+.paper:last-child{border-bottom:1px solid var(--line)}
+.paper-head{grid-column:1/5;display:grid;gap:20px;align-content:start}
+.paper-head .display{font-size:clamp(40px,4.4vw,64px)}
+.paper-head .colourway{font-family:var(--ital);font-style:italic;font-size:20px;color:var(--ink-soft);display:flex;align-items:center;gap:12px}
+.paper-head .colourway::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--sw);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.paper-head p{max-width:38ch;color:var(--ink-soft)}
+.paper-drop{grid-column:5/9}
+.paper-spec{grid-column:10/13;align-self:end}
+.paper.alt .paper-drop{grid-column:1/5;grid-row:1}
+.paper.alt .paper-head{grid-column:6/10;grid-row:1}
+.paper.alt .paper-spec{grid-column:10/13;grid-row:1}
+.drop{position:relative;aspect-ratio:3/4.3;overflow:hidden;background:var(--plaster-deep);outline:1px solid var(--line);outline-offset:10px;cursor:pointer}
+.drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .8s ease,transform 1.2s ease}
+.drop img.room{opacity:0}
+.drop:hover img.room,.drop.on img.room{opacity:1}
+.drop:hover img.swatch,.drop.on img.swatch{transform:scale(1.04)}
+.drop .hint{position:absolute;right:14px;bottom:14px;font:500 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--chalk);background:rgba(30,29,24,.7);padding:9px 12px;transition:opacity .4s}
+.drop:hover .hint,.drop.on .hint{opacity:0}
+.spec{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0 22px;font-size:14.5px}
+.spec dt{padding:10px 0;border-top:1px solid var(--line);color:var(--ink-faint);font-weight:500;letter-spacing:.02em}
+.spec dd{margin:0;padding:10px 0;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.spec dt:first-of-type,.spec dd:first-of-type{border-top:0}
+.spec-title{font:500 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 14px}
+
+/* colourway switch on a paper */
+.cw-switch{display:flex;gap:8px;flex-wrap:wrap}
+.cw-switch .pill{padding:9px 14px;display:inline-flex;align-items:center;gap:9px}
+.cw-switch .pill::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.cw-switch .pill[aria-pressed="true"]::before,.cw-switch .pill:hover::before{box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.drop.still{cursor:default}
+.drop.still:hover img.swatch{transform:none}
+.drop.multi img{opacity:0}
+.drop.multi img.swatch.active{opacity:1}
+.drop.multi:hover img.room.active,.drop.multi.on img.room.active{opacity:1}
+.drop.multi.noroom .hint{opacity:0}
+
+/* two rooms, one drawing */
+.pair{grid-column:1/13;margin-top:clamp(48px,6vw,96px)}
+.pair-head{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:28px}
+.pair-head .display{grid-column:1/7;font-size:clamp(36px,4.6vw,64px)}
+.pair-head .lead{grid-column:7/13;font-size:19px}
+.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pair-grid figure{margin:0}
+.pair-grid img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 40%}
+.pair-grid figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:14px;font-family:var(--ital);font-style:italic;font-size:15px;color:var(--ink-soft)}
+.pair-grid figcaption small{font:500 10px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--ink-faint);white-space:nowrap}
+
+/* atelier */
+.atelier{background:var(--ink);color:var(--chalk)}
+.atelier .eyebrow{color:var(--grass)}
+.atelier .lead{color:rgba(246,242,234,.72)}
+.atelier .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.atelier-media{grid-column:1/6;position:relative}
+.atelier-media img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 40%}
+.atelier-media figcaption{margin-top:14px;font-family:var(--ital);font-style:italic;font-size:15px;color:rgba(246,242,234,.6);max-width:36ch}
+.atelier-text{grid-column:7/13;display:grid;gap:34px;align-content:start}
+.atelier-text .display{font-size:clamp(44px,5.4vw,80px)}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:22px 0;border-top:1px solid rgba(246,242,234,.16)}
+.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:38px;line-height:.9;color:var(--ochre)}
+.steps h3{margin:0 0 6px;font-family:var(--display);font-weight:400;font-size:26px;letter-spacing:.01em}
+.steps p{color:rgba(246,242,234,.72);font-size:16px;max-width:52ch}
+
+/* colourway */
+.mixer{background:var(--plaster-deep)}
+.mixer .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.mixer .section-head{grid-column:1/13}
+.tile-wrap{grid-column:1/8;position:relative}
+.tile{position:relative;width:100%;aspect-ratio:4/3;background:var(--chalk);box-shadow:0 30px 60px -30px rgba(30,29,24,.55);outline:1px solid var(--line);outline-offset:12px}
+.tile canvas{display:block;width:100%;height:100%}
+.tile-label{position:absolute;left:0;right:0;bottom:-58px;display:flex;justify-content:space-between;align-items:baseline;gap:16px;font-size:14px}
+.tile-label b{font-family:var(--display);font-weight:400;font-size:24px;letter-spacing:.01em}
+.tile-label span{font-family:var(--ital);font-style:italic;color:var(--ink-soft)}
+.controls{grid-column:9/13;display:grid;gap:30px;align-content:start}
+.ctl legend,.ctl-title{font:500 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);padding:0;margin:0 0 14px}
+.ctl{border:0;padding:0;margin:0}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{border:1px solid var(--line-strong);background:transparent;padding:10px 16px;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;color:var(--ink);transition:background .2s,color .2s}
+.pill[aria-pressed="true"],.pill:hover{background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.swatches{display:flex;flex-wrap:wrap;gap:12px}
+.sw{width:38px;height:38px;border-radius:50%;border:1px solid rgba(30,29,24,.25);background:var(--c);cursor:pointer;position:relative;padding:0;transition:transform .2s}
+.sw:hover{transform:scale(1.08)}
+.sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--plaster-deep),0 0 0 4px var(--ink)}
+.sw span{position:absolute;left:0;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.range{width:100%;accent-color:var(--ink)}
+.range-row{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-faint);font-variant-numeric:tabular-nums;margin-top:6px}
+.controls .btn{justify-self:start}
+.controls .note{font-size:13.5px;color:var(--ink-faint);max-width:32ch}
+
+/* commissions */
+.commissions .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.commissions .section-head{grid-column:1/13}
+.commissions .copy{grid-column:1/7;font-size:18px;color:var(--ink-soft)}
+.commissions .copy strong{color:var(--ink);font-weight:600}
+.commissions .terms{grid-column:8/13}
+.band{grid-column:1/13;margin-top:clamp(48px,6vw,96px);position:relative}
+.band img{width:100%;aspect-ratio:16/8.5;object-fit:cover;object-position:50% 38%}
+.band figcaption{display:flex;justify-content:space-between;gap:16px;margin-top:14px;font-family:var(--ital);font-style:italic;font-size:15px;color:var(--ink-soft)}
+.band figcaption small{font:500 10px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--ink-faint)}
+
+/* footer */
+.footer{padding:clamp(80px,9vw,140px) var(--gutter) 40px;border-top:1px solid var(--line)}
+.footer .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+.footer .display{grid-column:1/9;font-size:clamp(48px,7vw,112px)}
+.footer .cols{grid-column:1/13;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:clamp(40px,5vw,72px);padding-top:32px;border-top:1px solid var(--line)}
+.footer .cols h4{margin:0 0 12px;font:500 11px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+.footer .cols a{text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s}
+.footer .cols a:hover{border-color:var(--ink)}
+.footer .cols p{font-size:15.5px;line-height:1.7}
+.footer .bottom{grid-column:1/13;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;font:500 10.5px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+
+/* reveal */
+.rv{transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.rv.pre{opacity:0;transform:translateY(26px)}
+
+@media (max-width:960px){
+  .nav ul{display:none}
+  .hero-media{grid-column:1/13;grid-row:2;margin-top:24px}
+  .hero-side{grid-column:1/13;grid-row:3}
+  .section-head .display{grid-column:1/13}.section-head .lead{grid-column:1/13}
+  .paper,.paper.alt{display:grid;grid-template-columns:1fr}
+  .paper-head,.paper-drop,.paper-spec,.paper.alt .paper-head,.paper.alt .paper-drop,.paper.alt .paper-spec{grid-column:1/-1;grid-row:auto}
+  .atelier-media,.atelier-text,.tile-wrap,.controls,.commissions .copy,.commissions .terms,.footer .display{grid-column:1/13}
+  .tile-wrap{margin-bottom:64px}
+  .pair-head .display,.pair-head .lead{grid-column:1/13}
+  .pair-grid{grid-template-columns:1fr}
+  .footer .cols{grid-template-columns:repeat(2,1fr)}
+  .vert{display:none}
+}
+@media (max-width:560px){
+  .hero-row{flex-direction:column-reverse;align-items:flex-start}
+  .footer .cols{grid-template-columns:1fr}
+  .steps li{grid-template-columns:48px 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .wordmark .l span,.hero-media .frame,.hero-media img{animation:none}
+  .ticker .track{animation:none}
+  .rv{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="mark" href="#top">Eleanor's Wall</a>
+  <ul>
+    <li><a href="#papers">The papers</a></li>
+    <li><a href="#atelier">Atelier</a></li>
+    <li><a href="#colourway">Colourways</a></li>
+    <li><a href="#commissions">Commissions</a></li>
+  </ul>
+  <a class="btn" href="#enquire">Enquire</a>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <p class="eyebrow">Hand-painted wallpaper &middot; Notting Hill, London W11</p>
+        <h1 class="display wordmark"><span class="l"><span>Eleanor's</span></span><span class="l"><span>Wall</span></span></h1>
+      </div>
+      <div class="hero-media">
+        <div class="frame">
+          <img src="img/room-ginkgo.jpg" alt="A bedroom papered floor to ceiling, including the pitched ceiling, in a blue ginkgo pattern on a chalk ground" width="1125" height="1500" fetchpriority="high">
+          <div class="ticket"><b>Westbourne Ginkgo</b><i>Delft on chalk &middot; walls and ceiling</i><small>Drop 04 &middot; 52 cm &times; 3.1 m</small></div>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="hero-row">
+          <p class="lead">Every length is painted by hand, on a long table in a studio off Portobello Road. No two drops are the same, and that is rather the point.</p>
+          <div class="sample" aria-hidden="true"><img src="img/swatch-strawberry-apricot.jpg" alt=""></div>
+        </div>
+        <div class="ctas">
+          <a class="btn solid" href="#papers">See the papers</a>
+          <a class="btn" href="#enquire">Book a studio visit</a>
+        </div>
+      </div>
+    </div>
+    <span class="vert" aria-hidden="true">Painted in W11 &middot; Est. 2026</span>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="track">
+      <span>Ladbroke Fern <i>ink on grasscloth</i></span><span>Portobello Strawberry <i>ink on chalk</i></span><span>Westbourne Ginkgo <i>Delft on chalk</i></span><span>Painted to order <i>any colourway</i></span>
+      <span>Ladbroke Fern <i>ink on grasscloth</i></span><span>Portobello Strawberry <i>ink on chalk</i></span><span>Westbourne Ginkgo <i>Delft on chalk</i></span><span>Painted to order <i>any colourway</i></span>
+    </div>
+  </div>
+
+  <section class="section" id="papers">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">The papers</p>
+        <h2 class="display">Three patterns, painted to order.</h2>
+        <p class="lead">Each design is drawn once, then painted freehand onto every length. Choose a pattern, a ground and an ink. Or bring us a room and we will draw something for it.</p>
+      </div>
+
+      <article class="paper rv">
+        <div class="paper-head" style="--sw:#2A2922">
+          <h3 class="display">Ladbroke Fern</h3>
+          <p class="colourway">Ink on natural grasscloth</p>
+          <p>Whorls of fern painted in casein ink straight onto woven sisal, so the weave shows through every leaf. Named for Ladbroke Square gardens in April, when the fronds unfurl.</p>
+        </div>
+        <div class="paper-drop">
+          <div class="drop still">
+            <img class="swatch" src="img/atelier.jpg" alt="Ladbroke Fern being hung in an arched dining room" loading="lazy">
+          </div>
+        </div>
+        <div class="paper-spec">
+          <p class="spec-title">Specification</p>
+          <dl class="spec">
+            <dt>Width</dt><dd>91 cm</dd>
+            <dt>Vertical repeat</dt><dd>64 cm</dd>
+            <dt>Length</dt><dd>Painted to your drop, up to 3.2 m</dd>
+            <dt>Ground</dt><dd>Sisal grasscloth, paper-backed</dd>
+            <dt>Medium</dt><dd>Casein distemper</dd>
+            <dt>Match</dt><dd>Half drop</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="paper alt rv">
+        <div class="paper-drop">
+          <div class="drop multi" data-drop id="strawberry-drop">
+            <img class="swatch active" data-cw="ink" src="img/swatch-strawberry-ink.jpg" alt="The Portobello Strawberry repeat in ink on chalk" loading="lazy">
+            <img class="swatch" data-cw="apricot" src="img/swatch-strawberry-apricot.jpg" alt="The Portobello Strawberry repeat in apricot fruit and duck-egg leaves on chalk" loading="lazy">
+            <img class="swatch" data-cw="ochre" src="img/room-strawberry.jpg" alt="Portobello Strawberry in ochre on chalk, hung in a bedroom" loading="lazy">
+            <img class="room active" data-cw="ink" src="img/room-strawberry-ink.jpg" alt="Portobello Strawberry in ink on chalk behind a carved oak bed" loading="lazy">
+            <span class="hint">Hover to see it hung</span>
+          </div>
+        </div>
+        <div class="paper-head" style="--sw:#26251E">
+          <h3 class="display">Portobello Strawberry</h3>
+          <p class="colourway" id="strawberry-cw">Ink on chalk</p>
+          <p>Wild strawberries and their serrated leaves, block-printed by hand and then painted through so the fruit sits slightly proud of the leaves. In ochre it is warm as a Saturday on the Portobello Road; in ink it turns a bedroom into a woodcut; in apricot and duck egg it is a nursery that will grow up nicely.</p>
+          <div class="cw-switch" id="strawberry-switch" role="group" aria-label="Colourway">
+            <button class="pill" type="button" data-cw="ink" data-label="Ink on chalk" data-sw="#26251E" style="--c:#26251E" aria-pressed="true">Ink</button>
+            <button class="pill" type="button" data-cw="apricot" data-label="Apricot &amp; duck egg on chalk" data-sw="#E8B98A" style="--c:#E8B98A">Apricot</button>
+            <button class="pill" type="button" data-cw="ochre" data-label="Ochre on chalk" data-sw="#C8A14C" style="--c:#C8A14C">Ochre</button>
+          </div>
+        </div>
+        <div class="paper-spec">
+          <p class="spec-title">Specification</p>
+          <dl class="spec">
+            <dt>Width</dt><dd>52 cm</dd>
+            <dt>Vertical repeat</dt><dd>38 cm</dd>
+            <dt>Length</dt><dd>10 m lengths, cut to drop</dd>
+            <dt>Ground</dt><dd>Non-woven lining, chalk-washed</dd>
+            <dt>Medium</dt><dd>Ochre pigment in linseed</dd>
+            <dt>Match</dt><dd>Straight</dd>
+          </dl>
+        </div>
+      </article>
+
+      <article class="paper rv">
+        <div class="paper-head" style="--sw:#7C9FBF">
+          <h3 class="display">Westbourne Ginkgo</h3>
+          <p class="colourway">Delft on chalk</p>
+          <p>A scatter of ginkgo fans in a Delft blue that climbs the wall and carries on over the ceiling. Drawn for rooms with a pitch to them, and for people who have decided the ceiling counts.</p>
+        </div>
+        <div class="paper-drop">
+          <div class="drop" data-drop>
+            <img class="swatch" src="img/swatch-ginkgo.jpg" alt="The Westbourne Ginkgo repeat in teal on chalk, shown flat" loading="lazy">
+            <img class="room" src="img/room-ginkgo.jpg" alt="Westbourne Ginkgo hung across a bedroom's walls and pitched ceiling" loading="lazy">
+            <span class="hint">Hover to see it hung</span>
+          </div>
+        </div>
+        <div class="paper-spec">
+          <p class="spec-title">Specification</p>
+          <dl class="spec">
+            <dt>Width</dt><dd>52 cm</dd>
+            <dt>Vertical repeat</dt><dd>48 cm</dd>
+            <dt>Length</dt><dd>10 m lengths, cut to drop</dd>
+            <dt>Ground</dt><dd>Non-woven lining, chalk-washed</dd>
+            <dt>Medium</dt><dd>Gouache bound in size</dd>
+            <dt>Match</dt><dd>Half drop</dd>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section atelier" id="atelier">
+    <div class="wrap">
+      <figure class="atelier-media rv" style="margin:0">
+        <img src="img/atelier.jpg" alt="A paperhanger on a step ladder fitting a length of Ladbroke Fern in an arched dining room, paste table and rolls in the foreground" loading="lazy">
+        <figcaption>Ladbroke Fern going up in a dining room off Kensington Park Road. The paste table has been in the family longer than the pattern.</figcaption>
+      </figure>
+      <div class="atelier-text">
+        <div class="rv">
+          <p class="eyebrow" style="margin-bottom:22px">The atelier</p>
+          <h2 class="display">Painted flat, hung by hand.</h2>
+        </div>
+        <p class="lead rv">There is no printing press in the studio. There is a twelve-metre table, a row of pigment jars, a stack of cartoons and Eleanor, with a brush.</p>
+        <ol class="steps rv">
+          <li><div><h3>The room, at four in the afternoon</h3><p>We come to you and measure every drop, then sit in the room while the light goes. The colour is mixed for that light, not for the studio's.</p></div></li>
+          <li><div><h3>Cartoon and sample</h3><p>The pattern is drawn at full size for your wall heights. You get a 60 &times; 60 cm sample painted on your chosen ground within two weeks.</p></div></li>
+          <li><div><h3>Grinding the colour</h3><p>Pigment is ground into casein, gouache or linseed by hand and matched to the joinery, the floor and whatever you are not planning to change.</p></div></li>
+          <li><div><h3>Painting the lengths</h3><p>Each length is laid flat and painted freehand from the cartoon. Every fern, fruit and fan is one brushstroke, which is why no two drops repeat exactly.</p></div></li>
+          <li><div><h3>Curing and numbering</h3><p>Lengths cure for a week, then are rolled and numbered in hanging order so the pattern reads across corners, chimney breasts and doors.</p></div></li>
+          <li><div><h3>Hanging</h3><p>Our own paperhanger fits the paper, working around your decorators. Ceilings included, as long as someone holds the ladder.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section mixer" id="colourway">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">Colourways</p>
+        <h2 class="display">Mix your own colourway.</h2>
+        <p class="lead">Pick a pattern, a ground and an ink. The tile is painted live in front of you, so it never comes out quite the same twice. Nor will your walls.</p>
+      </div>
+      <div class="tile-wrap rv">
+        <div class="tile"><canvas id="paint" role="img" aria-label="A live-painted tile of the chosen pattern in the chosen colourway"></canvas></div>
+        <div class="tile-label"><b id="lbl-name">Westbourne Ginkgo</b><span id="lbl-spec">Delft on chalk &middot; repeat 48 cm</span></div>
+      </div>
+      <div class="controls rv">
+        <fieldset class="ctl"><legend>Pattern</legend>
+          <div class="pills" id="motifs">
+            <button class="pill" type="button" data-motif="fern">Fern</button>
+            <button class="pill" type="button" data-motif="strawberry">Strawberry</button>
+            <button class="pill" type="button" data-motif="ginkgo" aria-pressed="true">Ginkgo</button>
+          </div>
+        </fieldset>
+        <fieldset class="ctl"><legend>Ground</legend>
+          <div class="swatches" id="grounds">
+            <button class="sw" type="button" style="--c:#F3EEE3" data-name="chalk" data-c="#F3EEE3" aria-pressed="true"><span>Chalk</span></button>
+            <button class="sw" type="button" style="--c:#E2D7C0" data-name="plaster" data-c="#E2D7C0"><span>Plaster</span></button>
+            <button class="sw" type="button" style="--c:#B99A62" data-name="grasscloth" data-c="#B99A62"><span>Grasscloth</span></button>
+            <button class="sw" type="button" style="--c:#CBD8D3" data-name="duck egg" data-c="#CBD8D3"><span>Duck egg</span></button>
+            <button class="sw" type="button" style="--c:#D9B8B0" data-name="tea rose" data-c="#D9B8B0"><span>Tea rose</span></button>
+            <button class="sw" type="button" style="--c:#1F1E19" data-name="ink" data-c="#1F1E19"><span>Ink</span></button>
+          </div>
+        </fieldset>
+        <fieldset class="ctl"><legend>Ink</legend>
+          <div class="swatches" id="inks">
+            <button class="sw" type="button" style="--c:#6F93B7" data-name="Delft" data-c="#6F93B7" aria-pressed="true"><span>Delft</span></button>
+            <button class="sw" type="button" style="--c:#26251E" data-name="fern black" data-c="#26251E"><span>Fern black</span></button>
+            <button class="sw" type="button" style="--c:#C8A14C" data-name="ochre" data-c="#C8A14C"><span>Ochre</span></button>
+            <button class="sw" type="button" style="--c:#6E2A2A" data-name="oxblood" data-c="#6E2A2A"><span>Oxblood</span></button>
+            <button class="sw" type="button" style="--c:#788A6B" data-name="sage" data-c="#788A6B"><span>Sage</span></button>
+            <button class="sw" type="button" style="--c:#F6F2EA" data-name="chalk" data-c="#F6F2EA"><span>Chalk</span></button>
+          </div>
+        </fieldset>
+        <div class="ctl">
+          <label class="ctl-title" for="scale" style="display:block">Scale of repeat</label>
+          <input class="range" id="scale" type="range" min="70" max="140" value="100" step="5">
+          <div class="range-row"><span>Fine</span><span id="lbl-scale">100%</span><span>Bold</span></div>
+        </div>
+        <button class="btn" type="button" id="repaint">Paint it again</button>
+        <a class="btn solid" id="request" href="#enquire">Request this colourway</a>
+        <p class="note">We will paint a 60 &times; 60 cm sample of your colourway on the real ground and post it to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section commissions" id="commissions">
+    <div class="wrap">
+      <div class="section-head rv">
+        <p class="eyebrow">Commissions</p>
+        <h2 class="display">Bespoke, from a single wall to a whole house.</h2>
+        <p class="lead">Most of what leaves the studio is made for one room. Interior designers and architects across Notting Hill, Holland Park and Kensington bring us the plan; we bring the paper.</p>
+      </div>
+      <div class="copy rv">
+        <p>A commission starts with a conversation and a site visit. We look at the proportions of the room, where the windows are, what the joinery is doing and what the floor wants to talk to. Then Eleanor draws a cartoon at full height for those exact walls, so a motif never lands awkwardly on a light switch or dies in a corner.</p>
+        <p>Existing patterns can be recoloured, rescaled or redrawn. <strong>New patterns</strong> can be drawn from your garden, a piece of fabric, a grandmother's plate. <strong>Ceilings</strong> are welcome; they are, if anything, the best part. Papers can be painted to run continuously across cupboard doors and panelling.</p>
+        <p>Trade clients receive a bound sample book, trade pricing and a named contact who will pick up the phone on site.</p>
+      </div>
+      <div class="terms rv">
+        <p class="spec-title">How it works</p>
+        <dl class="spec">
+          <dt>Site visit</dt><dd>W11 and neighbouring postcodes, or by arrangement</dd>
+          <dt>Sample</dt><dd>60 &times; 60 cm on your ground, within 2 weeks</dd>
+          <dt>Lead time</dt><dd>8 to 12 weeks from approved sample</dd>
+          <dt>Hanging</dt><dd>Our paperhanger, scheduled with your decorators</dd>
+          <dt>Pricing</dt><dd>Per drop, on application</dd>
+          <dt>Trade</dt><dd>Sample book and trade terms for designers and architects</dd>
+        </dl>
+      </div>
+      <div class="pair rv">
+        <div class="pair-head">
+          <h3 class="display">One drawing, two houses.</h3>
+          <p class="lead">The same strawberry cartoon, painted in ochre for a west-facing bedroom and in ink for a room with an oak bed that wanted something to argue with.</p>
+        </div>
+        <div class="pair-grid">
+          <figure>
+            <img src="img/room-strawberry.jpg" alt="Portobello Strawberry in ochre on chalk, in a sunlit bedroom with a striped duvet and a pleated lamp" loading="lazy">
+            <figcaption><span>Ochre on chalk. Mixed at half past four so it would hold its warmth once the sun had gone.</span><small>Private house, W11</small></figcaption>
+          </figure>
+          <figure>
+            <img src="img/room-strawberry-ink.jpg" alt="Portobello Strawberry in ink on chalk behind a carved oak bed with a copper anglepoise lamp" loading="lazy">
+            <figcaption><span>Ink on chalk. The leaves were painted last, wet into the fruit, so the edges bleed like a woodcut.</span><small>Private house, W11</small></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="enquire">
+  <div class="wrap">
+    <h2 class="display rv">Come and see the paper in daylight.</h2>
+    <div class="cols rv">
+      <div><h4>Studio</h4><p>Notting Hill, London W11<br>Open by appointment,<br>Tuesday to Saturday</p></div>
+      <div><h4>Enquiries</h4><p><a href="mailto:hello@eleanorswall.com">hello@eleanorswall.com</a><br><a href="https://instagram.com/eleanorswall" rel="noopener">@eleanorswall</a></p></div>
+      <div><h4>Trade</h4><p>Interior designers and architects: ask for the sample book and trade terms.</p></div>
+      <div><h4>Press</h4><p>High-resolution images of every paper, hung and flat, on request.</p></div>
+    </div>
+    <div class="bottom"><span>&copy; 2026 Eleanor's Wall</span><span>Hand-painted wallpaper &middot; Notting Hill</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* nav */
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* reveal on scroll: only elements below the fold get parked, so the page is complete at rest */
+  var rvs = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px'});
+    rvs.forEach(function(el){
+      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('pre'); io.observe(el); }
+    });
+  }
+
+  /* strawberry colourway switch */
+  var swd = document.getElementById('strawberry-drop'), swSwitch = document.getElementById('strawberry-switch');
+  swSwitch.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var cw = b.dataset.cw, hasRoom = false;
+    swSwitch.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', x===b ? 'true' : 'false'); });
+    swd.querySelectorAll('img').forEach(function(im){ var on = im.dataset.cw === cw; im.classList.toggle('active', on); if (on && im.classList.contains('room')) hasRoom = true; });
+    swd.classList.toggle('noroom', !hasRoom); swd.classList.remove('on');
+    document.getElementById('strawberry-cw').innerHTML = b.dataset.label;
+    swd.closest('.paper').querySelector('.paper-head').style.setProperty('--sw', b.dataset.sw);
+  });
+
+  /* touch toggle for the drops */
+  document.querySelectorAll('[data-drop]').forEach(function(d){
+    d.addEventListener('click', function(){ d.classList.toggle('on'); });
+  });
+
+  /* ---------- the colourway painter ---------- */
+  var canvas = document.getElementById('paint');
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0, list = [], raf = 0;
+  var state = { motif:'ginkgo', ground:'#F3EEE3', groundName:'chalk', ink:'#6F93B7', inkName:'Delft', scale:1, seed:7 };
+  var names = { fern:'Ladbroke Fern', strawberry:'Portobello Strawberry', ginkgo:'Westbourne Ginkgo' };
+  var repeats = { fern:64, strawberry:38, ginkgo:48 };
+  var cell = { fern:230, strawberry:125, ginkgo:135 };
+
+  function rng(seed){ var s = (seed >>> 0) || 1; return function(){ s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+
+  function fanPath(c, rad, spread){
+    c.beginPath(); c.moveTo(0,0);
+    c.arc(0,0,rad, -Math.PI/2 - spread, -Math.PI/2 - 0.09);
+    c.lineTo(0, -rad*0.8);
+    c.arc(0,0,rad, -Math.PI/2 + 0.09, -Math.PI/2 + spread);
+    c.closePath();
+  }
+  function ginkgo(c, s, r){
+    var n = 1 + Math.floor(r()*3);
+    for (var i=0;i<n;i++){
+      c.save();
+      var ang = r()*Math.PI*2, d = s*0.2*r();
+      c.translate(Math.cos(ang)*d, Math.sin(ang)*d);
+      c.rotate(r()*Math.PI*2);
+      var rad = s*(0.2 + r()*0.12), spread = 0.9 + r()*0.35;
+      c.lineWidth = Math.max(1, s*0.016); c.lineCap = 'round';
+      c.beginPath(); c.moveTo(0,0); c.quadraticCurveTo(rad*0.35, rad*0.6, -rad*0.15, rad*1.15); c.stroke();
+      fanPath(c, rad, spread); c.fill();
+      c.globalAlpha *= 0.32; c.translate(rad*0.05, -rad*0.035); fanPath(c, rad*1.03, spread); c.fill();
+      c.restore();
+    }
+  }
+  function leaflet(c, L){
+    c.beginPath(); c.moveTo(0,0);
+    c.quadraticCurveTo(L*0.5, -L*0.38, L, 0);
+    c.quadraticCurveTo(L*0.5, L*0.38, 0, 0);
+    c.fill();
+  }
+  function fern(c, s, r){
+    var fronds = 5 + Math.floor(r()*3), base = r()*Math.PI*2;
+    c.lineWidth = Math.max(1, s*0.011); c.lineCap = 'round';
+    for (var i=0;i<fronds;i++){
+      c.save();
+      c.rotate(base + i*(Math.PI*2/fronds) + (r()-0.5)*0.35);
+      var L = s*(0.34 + r()*0.1), curl = (r()>0.5?1:-1)*L*0.5, cx = L*0.55;
+      c.beginPath(); c.moveTo(s*0.03,0); c.quadraticCurveTo(cx, 0, L, curl); c.stroke();
+      var segs = 13;
+      for (var k=2;k<segs;k++){
+        var t = k/segs;
+        var x = 2*(1-t)*t*cx + t*t*L, y = t*t*curl;
+        var tx = 2*(1-t)*cx + 2*t*(L-cx), ty = 2*t*curl;
+        var a = Math.atan2(ty, tx), leaf = s*0.075*(1 - t*0.7);
+        for (var side=-1; side<=1; side+=2){
+          c.save(); c.translate(x,y); c.rotate(a + side*1.05); leaflet(c, leaf); c.restore();
+        }
+      }
+      c.restore();
+    }
+  }
+  function serratedLeaf(c, L, groundCol){
+    var n = 28; c.beginPath();
+    for (var i=0;i<=n;i++){
+      var t = i/n, ang = t*Math.PI*2, tooth = (i%2 ? 1 : 1.1);
+      var px = Math.cos(ang)*L*tooth, py = Math.sin(ang)*L*0.5*tooth;
+      if (i) c.lineTo(px,py); else c.moveTo(px,py);
+    }
+    c.closePath(); c.fill();
+    c.save(); c.strokeStyle = groundCol; c.globalAlpha *= 0.75; c.lineWidth = Math.max(1, L*0.06); c.lineCap='round';
+    c.beginPath(); c.moveTo(-L*0.85,0); c.lineTo(L*0.85,0);
+    for (var v=-2; v<=2; v++){ if(!v) continue; c.moveTo(v*L*0.3, 0); c.lineTo(v*L*0.3 + L*0.25*(v>0?1:-1)*-1, (v>0?-1:1)*L*0.3); }
+    c.stroke(); c.restore();
+  }
+  function strawberry(c, s, r){
+    var g = state.ground;
+    c.save(); c.rotate((r()-0.5)*1.1);
+    var b = s*0.3;
+    c.beginPath(); c.moveTo(0, -b*0.55);
+    c.bezierCurveTo(b*0.72, -b*0.72, b*0.78, b*0.18, 0, b*0.78);
+    c.bezierCurveTo(-b*0.78, b*0.18, -b*0.72, -b*0.72, 0, -b*0.55);
+    c.fill();
+    c.save(); c.fillStyle = g; c.globalAlpha *= 0.85;
+    for (var i=0;i<10;i++){
+      var py = -b*0.3 + r()*b*0.8, half = b*0.55*(1 - (py + b*0.3)/(b*1.15));
+      var px = (r()-0.5)*2*half;
+      c.beginPath(); c.ellipse(px, py, b*0.04, b*0.065, 0.4, 0, Math.PI*2); c.fill();
+    }
+    c.restore();
+    for (var k=-1;k<=1;k++){ c.save(); c.translate(0,-b*0.5); c.rotate(k*0.85 - Math.PI/2); leaflet(c, b*0.4); c.restore(); }
+    c.save(); c.translate(b*1.05, -b*0.55); c.rotate(-0.7 + r()*0.5); serratedLeaf(c, s*0.27, g); c.restore();
+    if (r() > 0.45){ c.save(); c.translate(-b*1.0, b*0.4); c.rotate(0.9 + r()*0.5); serratedLeaf(c, s*0.2, g); c.restore(); }
+    c.restore();
+  }
+  var draw = { ginkgo:ginkgo, fern:fern, strawberry:strawberry };
+
+  function size(){
+    var rect = canvas.parentNode.getBoundingClientRect();
+    W = Math.max(200, Math.round(rect.width)); H = Math.round(W*0.75);
+    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+  }
+  function build(){
+    var base = cell[state.motif]*state.scale;
+    var r = rng(state.seed*7919 + state.motif.length*131);
+    var out = [], cols = Math.ceil(W/base)+2, rows = Math.ceil(H/base)+2;
+    for (var j=-1;j<rows;j++) for (var i=-1;i<cols;i++){
+      out.push({ x: i*base + (j%2 ? base/2 : 0) + (r()-0.5)*base*0.28, y: j*base + (r()-0.5)*base*0.28, seed: Math.floor(r()*4294967295) });
+    }
+    out.sort(function(a,b){ return (a.x + a.y*1.25) - (b.x + b.y*1.25); });
+    list = out;
+  }
+  function render(progress){
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.fillStyle = state.ground; ctx.fillRect(0,0,W,H);
+    var base = cell[state.motif]*state.scale, n = Math.floor(list.length*progress);
+    for (var k=0;k<n;k++){
+      var it = list[k], r = rng(it.seed);
+      ctx.save(); ctx.translate(it.x, it.y);
+      ctx.fillStyle = state.ink; ctx.strokeStyle = state.ink; ctx.globalAlpha = 0.8 + r()*0.18;
+      draw[state.motif](ctx, base, r);
+      ctx.restore();
+    }
+  }
+  function ease(t){ return 1 - Math.pow(1-t, 3); }
+  function repaint(animate){
+    build();
+    cancelAnimationFrame(raf);
+    if (!animate || reduced){ render(1); return; }
+    var start = performance.now(), dur = 1500;
+    (function step(t){ var p = Math.min(1, (t-start)/dur); render(ease(p)); if (p<1) raf = requestAnimationFrame(step); })(start);
+  }
+  function labels(){
+    document.getElementById('lbl-name').textContent = names[state.motif];
+    var rep = Math.round(repeats[state.motif]*state.scale);
+    document.getElementById('lbl-spec').textContent = state.inkName + ' on ' + state.groundName + ' · repeat ' + rep + ' cm';
+    document.getElementById('lbl-scale').textContent = Math.round(state.scale*100) + '%';
+    var body = 'Hello Eleanor,\n\nI would like a sample of ' + names[state.motif] + ' in ' + state.inkName + ' on ' + state.groundName + ', at ' + Math.round(state.scale*100) + '% scale (repeat about ' + rep + ' cm).\n\nRoom: \nAddress: \n';
+    document.getElementById('request').href = 'mailto:hello@eleanorswall.com?subject=' + encodeURIComponent('Sample request: ' + names[state.motif]) + '&body=' + encodeURIComponent(body);
+  }
+  function press(group, btn){ group.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', b===btn ? 'true' : 'false'); }); }
+
+  document.getElementById('motifs').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    state.motif = b.dataset.motif; press(this, b); labels(); repaint(true);
+  });
+  document.getElementById('grounds').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    state.ground = b.dataset.c; state.groundName = b.dataset.name; press(this, b); labels(); repaint(true);
+  });
+  document.getElementById('inks').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    state.ink = b.dataset.c; state.inkName = b.dataset.name; press(this, b); labels(); repaint(true);
+  });
+  document.getElementById('scale').addEventListener('input', function(){ state.scale = this.value/100; labels(); repaint(false); });
+  document.getElementById('repaint').addEventListener('click', function(){ state.seed = Math.floor(Math.random()*1e6); repaint(true); });
+
+  var ro = new ResizeObserver(function(){ size(); repaint(false); });
+  ro.observe(canvas.parentNode);
+  size(); labels(); repaint(false);
+})();
+</script>
