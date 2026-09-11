@@ -242,10 +242,28 @@ p{margin:0}
   .rv{transition:none}
   html{scroll-behavior:auto}
 }
-:root{--plaster:#1B1A16;--plaster-deep:#131210;--chalk:#26241F;--ink:#F1EBDD;--ink-soft:#BDB5A3;--ink-faint:#8A8476;
-  --ochre:#D4AE5A;--ochre-deep:#B8923F;--ginkgo:#8FB0CC;--grass:#8A7248;--line:rgba(241,235,221,.16);--line-strong:rgba(241,235,221,.4);
-  --nav-bg:rgba(27,26,22,.86);--grain-blend:screen;
-  --atelier-bg:#EAE3D4;--atelier-fg:#1E1D18;--atelier-fg-soft:#55524A;--atelier-fg-faint:#8B877C;--atelier-line:rgba(30,29,24,.18)}
+
+/* papered: the prints are the wall, the content are sheets laid on it */
+.paper-bg{position:fixed;inset:0;z-index:-1;background:var(--chalk)}
+.paper-bg i{position:absolute;inset:0;background-repeat:repeat;background-size:min(46vw,560px) auto;opacity:0;transition:opacity 1.4s ease}
+.paper-bg i.on{opacity:1}
+.paper-bg::after{content:"";position:absolute;inset:0;background:rgba(246,242,234,.22)}
+.hero .wrap,.section .wrap,.footer .wrap{background:var(--plaster);padding:clamp(28px,4.5vw,72px);box-shadow:0 40px 80px -50px rgba(30,29,24,.7),0 0 0 1px rgba(30,29,24,.06)}
+.hero{padding-top:calc(96px + 2vw)}
+.atelier,.mixer{background:transparent}
+.atelier .wrap{background:var(--atelier-bg)}
+.mixer .wrap{background:var(--plaster-deep)}
+.footer{border-top:0}
+.ticker{box-shadow:0 20px 40px -30px rgba(30,29,24,.6)}
+.vert{display:none}
+.nav .mark,.nav ul a{text-shadow:0 0 12px var(--plaster),0 0 24px var(--plaster)}
+.nav.scrolled .mark,.nav.scrolled ul a{text-shadow:none}
+.nav .btn{background:var(--plaster)}
+.paper-name{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--chalk);border:1px solid var(--line-strong);padding:11px 14px;font:500 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);display:flex;gap:10px;align-items:center;box-shadow:0 12px 30px -18px rgba(0,0,0,.6)}
+.paper-name b{font-family:var(--ital);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)}
+@media (max-width:560px){.paper-name{display:none}}
+@media (prefers-reduced-motion:reduce){.paper-bg i{transition:none}}
+
 .scheme-bar{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--chalk);color:var(--ink);border:1px solid var(--line-strong);padding:11px 14px;font:500 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;align-items:center;box-shadow:0 12px 30px -18px rgba(0,0,0,.6)}
 .scheme-bar span{color:var(--ink-faint)}
 .scheme-bar a{text-decoration:none;color:var(--ink-soft);padding-bottom:2px;border-bottom:1px solid transparent}
@@ -258,7 +276,14 @@ p{margin:0}
 
 
 <div class="grain" aria-hidden="true"></div>
-<div class="scheme-bar"><span>Colour scheme</span><a href="../">Plaster</a><a href="../papered/">Papered</a><a href="../ink/" aria-current="page">Ink</a><a href="../duckegg/">Duck egg</a><a href="../grasscloth/">Grasscloth</a></div>
+<div class="scheme-bar"><span>Colour scheme</span><a href="../">Plaster</a><a href="../papered/" aria-current="page">Papered</a><a href="../ink/">Ink</a><a href="../duckegg/">Duck egg</a><a href="../grasscloth/">Grasscloth</a></div>
+
+<div class="paper-bg" aria-hidden="true">
+  <i data-paper="apricot" class="on" style="background-image:url(../img/bg-strawberry-apricot.jpg)"></i>
+  <i data-paper="ink" style="background-image:url(../img/bg-strawberry-ink.jpg)"></i>
+  <i data-paper="ginkgo" style="background-image:url(../img/bg-ginkgo.jpg)"></i>
+</div>
+<div class="paper-name" aria-live="polite"><span>On the wall</span><b id="paper-name">Portobello Strawberry, apricot</b></div>
 
 
 <header class="nav" id="nav">
@@ -273,7 +298,7 @@ p{margin:0}
 </header>
 
 <main id="top">
-  <section class="hero">
+  <section class="hero" data-paper="apricot">
     <div class="wrap">
       <div class="hero-top">
         <p class="eyebrow">Hand-painted wallpaper &middot; Notting Hill, London W11</p>
@@ -306,7 +331,7 @@ p{margin:0}
     </div>
   </div>
 
-  <section class="section" id="papers">
+  <section class="section" id="papers" data-paper="ink">
     <div class="wrap">
       <div class="section-head rv">
         <p class="eyebrow">The papers</p>
@@ -376,7 +401,7 @@ p{margin:0}
     </div>
   </section>
 
-  <section class="section atelier" id="atelier">
+  <section class="section atelier" id="atelier" data-paper="ginkgo">
     <div class="wrap">
       <figure class="atelier-media rv" style="margin:0">
         <img src="../img/atelier.jpg" alt="A paperhanger on a step ladder fitting a length of Portobello Strawberry in apricot and duck egg in an arched dining room, paste table and rolls in the foreground" loading="lazy">
@@ -400,7 +425,7 @@ p{margin:0}
     </div>
   </section>
 
-  <section class="section mixer" id="colourway">
+  <section class="section mixer" id="colourway" data-paper="apricot">
     <div class="wrap">
       <div class="section-head rv">
         <p class="eyebrow">Colourways</p>
@@ -450,7 +475,7 @@ p{margin:0}
     </div>
   </section>
 
-  <section class="section commissions" id="commissions">
+  <section class="section commissions" id="commissions" data-paper="ginkgo">
     <div class="wrap">
       <div class="section-head rv">
         <p class="eyebrow">Commissions</p>
@@ -497,7 +522,7 @@ p{margin:0}
   </section>
 </main>
 
-<footer class="footer" id="enquire">
+<footer class="footer" id="enquire" data-paper="ink">
   <div class="wrap">
     <h2 class="display rv">Come and see the paper in daylight.</h2>
     <div class="cols rv">
@@ -706,6 +731,23 @@ p{margin:0}
   var ro = new ResizeObserver(function(){ size(); repaint(false); });
   ro.observe(canvas.parentNode);
   size(); labels(); repaint(false);
+})();
+
+(function(){
+  var layers = {}, names = {apricot:'Portobello Strawberry, apricot', ink:'Portobello Strawberry, ink', ginkgo:'Westbourne Ginkgo, teal'};
+  document.querySelectorAll('.paper-bg i').forEach(function(i){ layers[i.dataset.paper] = i; });
+  var secs = Array.prototype.slice.call(document.querySelectorAll('[data-paper]')), current = 'apricot', label = document.getElementById('paper-name');
+  function setPaper(p){ if (p === current || !layers[p]) return; current = p; Object.keys(layers).forEach(function(k){ layers[k].classList.toggle('on', k === p); }); label.textContent = names[p]; }
+  var ticking = false;
+  function pick(){
+    ticking = false;
+    var mid = window.innerHeight * 0.5, best = null;
+    for (var i = 0; i < secs.length; i++){ var r = secs[i].getBoundingClientRect(); if (r.top <= mid && r.bottom >= mid) { best = secs[i]; break; } }
+    if (!best) best = (secs[0].getBoundingClientRect().top > mid) ? secs[0] : secs[secs.length - 1];
+    setPaper(best.dataset.paper);
+  }
+  window.addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(pick); } }, {passive:true});
+  pick();
 })();
 </script>
 
