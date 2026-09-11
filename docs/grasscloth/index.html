@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Hand-painted wallpaper, made to order in Notting Hill.">
 <title>Eleanor's Wall</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -236,9 +242,23 @@ p{margin:0}
   .rv{transition:none}
   html{scroll-behavior:auto}
 }
+:root{--plaster:#C8B38C;--plaster-deep:#B9A27A;--chalk:#F1E8D6;--ink:#2B2A1F;--ink-soft:#5A553F;--ink-faint:#7E7659;
+  --ochre:#3F7F8E;--ochre-deep:#2F6673;--ginkgo:#3F7F8E;--grass:#C8B38C;--line:rgba(43,42,31,.22);--line-strong:rgba(43,42,31,.5);
+  --nav-bg:rgba(200,179,140,.88)}
+.scheme-bar{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--chalk);color:var(--ink);border:1px solid var(--line-strong);padding:11px 14px;font:500 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;align-items:center;box-shadow:0 12px 30px -18px rgba(0,0,0,.6)}
+.scheme-bar span{color:var(--ink-faint)}
+.scheme-bar a{text-decoration:none;color:var(--ink-soft);padding-bottom:2px;border-bottom:1px solid transparent}
+.scheme-bar a:hover{color:var(--ink)}
+.scheme-bar a[aria-current]{color:var(--ink);border-color:var(--ochre)}
+@media (max-width:560px){.scheme-bar{left:8px;right:8px;bottom:8px;justify-content:center;flex-wrap:wrap;gap:10px}}
 </style>
+</head>
+<body>
+
 
 <div class="grain" aria-hidden="true"></div>
+<div class="scheme-bar"><span>Colour scheme</span><a href="../">Plaster</a><a href="../ink/">Ink</a><a href="../duckegg/">Duck egg</a><a href="../grasscloth/" aria-current="page">Grasscloth</a></div>
+
 
 <header class="nav" id="nav">
   <a class="mark" href="#top">Eleanor's Wall</a>
@@ -260,14 +280,14 @@ p{margin:0}
       </div>
       <div class="hero-media">
         <div class="frame">
-          <img src="img/room-ginkgo.jpg" alt="A bedroom papered floor to ceiling, including the pitched ceiling, in a blue ginkgo pattern on a chalk ground" width="1125" height="1500" fetchpriority="high">
+          <img src="../img/room-ginkgo.jpg" alt="A bedroom papered floor to ceiling, including the pitched ceiling, in a blue ginkgo pattern on a chalk ground" width="1125" height="1500" fetchpriority="high">
           <div class="ticket"><b>Westbourne Ginkgo</b><i>Delft on chalk &middot; walls and ceiling</i><small>Drop 04 &middot; 52 cm &times; 3.1 m</small></div>
         </div>
       </div>
       <div class="hero-side">
         <div class="hero-row">
           <p class="lead">Every length is painted by hand, on a long table in a studio off Portobello Road. No two drops are the same, and that is rather the point.</p>
-          <div class="sample" aria-hidden="true"><img src="img/swatch-strawberry-apricot.jpg" alt=""></div>
+          <div class="sample" aria-hidden="true"><img src="../img/swatch-strawberry-apricot.jpg" alt=""></div>
         </div>
         <div class="ctas">
           <a class="btn solid" href="#papers">See the papers</a>
@@ -297,10 +317,10 @@ p{margin:0}
       <article class="paper rv">
         <div class="paper-drop">
           <div class="drop multi" data-drop id="strawberry-drop">
-            <img class="swatch active" data-cw="ink" src="img/swatch-strawberry-ink.jpg" alt="The Portobello Strawberry repeat in ink on chalk" loading="lazy">
-            <img class="swatch" data-cw="apricot" src="img/swatch-strawberry-apricot.jpg" alt="The Portobello Strawberry repeat in apricot fruit and duck-egg leaves on chalk" loading="lazy">
-            <img class="swatch" data-cw="ochre" src="img/room-strawberry.jpg" alt="Portobello Strawberry in ochre on chalk, hung in a bedroom" loading="lazy">
-            <img class="room active" data-cw="ink" src="img/room-strawberry-ink.jpg" alt="Portobello Strawberry in ink on chalk behind a carved oak bed" loading="lazy">
+            <img class="swatch active" data-cw="ink" src="../img/swatch-strawberry-ink.jpg" alt="The Portobello Strawberry repeat in ink on chalk" loading="lazy">
+            <img class="swatch" data-cw="apricot" src="../img/swatch-strawberry-apricot.jpg" alt="The Portobello Strawberry repeat in apricot fruit and duck-egg leaves on chalk" loading="lazy">
+            <img class="swatch" data-cw="ochre" src="../img/room-strawberry.jpg" alt="Portobello Strawberry in ochre on chalk, hung in a bedroom" loading="lazy">
+            <img class="room active" data-cw="ink" src="../img/room-strawberry-ink.jpg" alt="Portobello Strawberry in ink on chalk behind a carved oak bed" loading="lazy">
             <span class="hint">Hover to see it hung</span>
           </div>
         </div>
@@ -335,8 +355,8 @@ p{margin:0}
         </div>
         <div class="paper-drop">
           <div class="drop" data-drop>
-            <img class="swatch" src="img/swatch-ginkgo.jpg" alt="The Westbourne Ginkgo repeat in teal on chalk, shown flat" loading="lazy">
-            <img class="room" src="img/room-ginkgo.jpg" alt="Westbourne Ginkgo hung across a bedroom's walls and pitched ceiling" loading="lazy">
+            <img class="swatch" src="../img/swatch-ginkgo.jpg" alt="The Westbourne Ginkgo repeat in teal on chalk, shown flat" loading="lazy">
+            <img class="room" src="../img/room-ginkgo.jpg" alt="Westbourne Ginkgo hung across a bedroom's walls and pitched ceiling" loading="lazy">
             <span class="hint">Hover to see it hung</span>
           </div>
         </div>
@@ -358,7 +378,7 @@ p{margin:0}
   <section class="section atelier" id="atelier">
     <div class="wrap">
       <figure class="atelier-media rv" style="margin:0">
-        <img src="img/atelier.jpg" alt="A paperhanger on a step ladder fitting a length of Portobello Strawberry in apricot and duck egg in an arched dining room, paste table and rolls in the foreground" loading="lazy">
+        <img src="../img/atelier.jpg" alt="A paperhanger on a step ladder fitting a length of Portobello Strawberry in apricot and duck egg in an arched dining room, paste table and rolls in the foreground" loading="lazy">
         <figcaption>Portobello Strawberry, apricot and duck egg, going up in a dining room off Kensington Park Road, over the arch and all. The paste table has been in the family longer than the pattern.</figcaption>
       </figure>
       <div class="atelier-text">
@@ -459,15 +479,15 @@ p{margin:0}
         </div>
         <div class="pair-grid">
           <figure>
-            <img src="img/room-strawberry.jpg" alt="Portobello Strawberry in ochre on chalk, in a sunlit bedroom with a striped duvet and a pleated lamp" loading="lazy">
+            <img src="../img/room-strawberry.jpg" alt="Portobello Strawberry in ochre on chalk, in a sunlit bedroom with a striped duvet and a pleated lamp" loading="lazy">
             <figcaption><span>Ochre on chalk. Mixed at half past four so it would hold its warmth once the sun had gone.</span><small>Private house, W11</small></figcaption>
           </figure>
           <figure>
-            <img src="img/room-strawberry-ink.jpg" alt="Portobello Strawberry in ink on chalk behind a carved oak bed with a copper anglepoise lamp" loading="lazy">
+            <img src="../img/room-strawberry-ink.jpg" alt="Portobello Strawberry in ink on chalk behind a carved oak bed with a copper anglepoise lamp" loading="lazy">
             <figcaption><span>Ink on chalk. The leaves were painted last, wet into the fruit, so the edges bleed like a woodcut.</span><small>Private house, W11</small></figcaption>
           </figure>
           <figure>
-            <img src="img/atelier.jpg" alt="Portobello Strawberry in apricot and duck egg being hung in an arched dining room" loading="lazy">
+            <img src="../img/atelier.jpg" alt="Portobello Strawberry in apricot and duck egg being hung in an arched dining room" loading="lazy">
             <figcaption><span>Apricot and duck egg on chalk, carried up and over the arch. Photographed before the furniture went back.</span><small>Private house, W11</small></figcaption>
           </figure>
         </div>
@@ -687,3 +707,6 @@ p{margin:0}
   size(); labels(); repaint(false);
 })();
 </script>
+
+</body>
+</html>

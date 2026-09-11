@@ -18,6 +18,8 @@
   --ital:'Libre Caslon Text',Georgia,"Times New Roman",serif;
   --sans:'Karla',"Helvetica Neue",Arial,sans-serif;
   --max:1360px; --gutter:clamp(20px,4.5vw,64px);
+  --nav-bg:rgba(234,227,212,.86); --grain-blend:multiply;
+  --atelier-bg:var(--ink); --atelier-fg:var(--chalk); --atelier-fg-soft:rgba(246,242,234,.72); --atelier-fg-faint:rgba(246,242,234,.6); --atelier-line:rgba(246,242,234,.16);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -26,7 +28,7 @@ img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ochre);outline-offset:4px}
 .wrap{max-width:var(--max);margin:0 auto}
-.grain{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.085;mix-blend-mode:multiply;
+.grain{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.085;mix-blend-mode:var(--grain-blend);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* type */
@@ -46,7 +48,7 @@ p{margin:0}
 
 /* nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:40;padding:18px var(--gutter);display:flex;align-items:center;justify-content:space-between;transition:background .4s,box-shadow .4s}
-.nav.scrolled{background:rgba(234,227,212,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
 .nav .mark{font-family:var(--display);font-size:26px;text-decoration:none;letter-spacing:.02em}
 .nav ul{list-style:none;margin:0;padding:0;display:flex;gap:34px}
 .nav ul a{font:500 11.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--ink-soft);padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
@@ -116,7 +118,7 @@ p{margin:0}
 .drop img.room{opacity:0}
 .drop:hover img.room,.drop.on img.room{opacity:1}
 .drop:hover img.swatch,.drop.on img.swatch{transform:scale(1.04)}
-.drop .hint{position:absolute;right:14px;bottom:14px;font:500 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--chalk);background:rgba(30,29,24,.7);padding:9px 12px;transition:opacity .4s}
+.drop .hint{position:absolute;right:14px;bottom:14px;font:500 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--plaster);background:var(--ink);padding:9px 12px;transition:opacity .4s}
 .drop:hover .hint,.drop.on .hint{opacity:0}
 .spec{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0 22px;font-size:14.5px}
 .spec dt{padding:10px 0;border-top:1px solid var(--line);color:var(--ink-faint);font-weight:500;letter-spacing:.02em}
@@ -148,20 +150,20 @@ p{margin:0}
 .pair-grid figcaption small{font:500 10px/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--ink-faint);white-space:nowrap}
 
 /* atelier */
-.atelier{background:var(--ink);color:var(--chalk)}
+.atelier{background:var(--atelier-bg);color:var(--atelier-fg)}
 .atelier .eyebrow{color:var(--grass)}
-.atelier .lead{color:rgba(246,242,234,.72)}
+.atelier .lead{color:var(--atelier-fg-soft)}
 .atelier .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
 .atelier-media{grid-column:1/6;position:relative}
 .atelier-media img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 40%}
-.atelier-media figcaption{margin-top:14px;font-family:var(--ital);font-style:italic;font-size:15px;color:rgba(246,242,234,.6);max-width:36ch}
+.atelier-media figcaption{margin-top:14px;font-family:var(--ital);font-style:italic;font-size:15px;color:var(--atelier-fg-faint);max-width:36ch}
 .atelier-text{grid-column:7/13;display:grid;gap:34px;align-content:start}
 .atelier-text .display{font-size:clamp(44px,5.4vw,80px)}
 .steps{list-style:none;margin:0;padding:0;counter-reset:s}
-.steps li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:22px 0;border-top:1px solid rgba(246,242,234,.16)}
+.steps li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--atelier-line)}
 .steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);font-family:var(--display);font-size:38px;line-height:.9;color:var(--ochre)}
 .steps h3{margin:0 0 6px;font-family:var(--display);font-weight:400;font-size:26px;letter-spacing:.01em}
-.steps p{color:rgba(246,242,234,.72);font-size:16px;max-width:52ch}
+.steps p{color:var(--atelier-fg-soft);font-size:16px;max-width:52ch}
 
 /* colourway */
 .mixer{background:var(--plaster-deep)}
@@ -180,7 +182,7 @@ p{margin:0}
 .pill{border:1px solid var(--line-strong);background:transparent;padding:10px 16px;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;color:var(--ink);transition:background .2s,color .2s}
 .pill[aria-pressed="true"],.pill:hover{background:var(--ink);color:var(--chalk);border-color:var(--ink)}
 .swatches{display:flex;flex-wrap:wrap;gap:12px}
-.sw{width:38px;height:38px;border-radius:50%;border:1px solid rgba(30,29,24,.25);background:var(--c);cursor:pointer;position:relative;padding:0;transition:transform .2s}
+.sw{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-strong);background:var(--c);cursor:pointer;position:relative;padding:0;transition:transform .2s}
 .sw:hover{transform:scale(1.08)}
 .sw[aria-pressed="true"]{box-shadow:0 0 0 3px var(--plaster-deep),0 0 0 4px var(--ink)}
 .sw span{position:absolute;left:0;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -240,12 +242,21 @@ p{margin:0}
   .rv{transition:none}
   html{scroll-behavior:auto}
 }
+
+.scheme-bar{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--chalk);color:var(--ink);border:1px solid var(--line-strong);padding:11px 14px;font:500 10.5px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;display:flex;gap:14px;align-items:center;box-shadow:0 12px 30px -18px rgba(0,0,0,.6)}
+.scheme-bar span{color:var(--ink-faint)}
+.scheme-bar a{text-decoration:none;color:var(--ink-soft);padding-bottom:2px;border-bottom:1px solid transparent}
+.scheme-bar a:hover{color:var(--ink)}
+.scheme-bar a[aria-current]{color:var(--ink);border-color:var(--ochre)}
+@media (max-width:560px){.scheme-bar{left:8px;right:8px;bottom:8px;justify-content:center;flex-wrap:wrap;gap:10px}}
 </style>
 </head>
 <body>
 
 
 <div class="grain" aria-hidden="true"></div>
+<div class="scheme-bar"><span>Colour scheme</span><a href="" aria-current="page">Plaster</a><a href="ink/">Ink</a><a href="duckegg/">Duck egg</a><a href="grasscloth/">Grasscloth</a></div>
+
 
 <header class="nav" id="nav">
   <a class="mark" href="#top">Eleanor's Wall</a>
